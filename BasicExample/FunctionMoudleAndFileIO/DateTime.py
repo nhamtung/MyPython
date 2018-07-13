@@ -32,5 +32,16 @@ print("\nHàm prmonth(year,month): In ra tháng đã cho của năm đã cung c�
 import calendar
 print (calendar.prmonth(2015,11))
 
-# Function trong Python
-# https://vietjack.com/python/ham_trong_python.jsp
+
+
+
+
+
+
+
+
+
+
+
+
+
