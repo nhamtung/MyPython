@@ -41,8 +41,8 @@ parser.add_argument("-k", "--key", action="store", dest="privateKeyPath", help="
 parser.add_argument("-p", "--port", action="store", dest="port", type=int, help="Port number override")
 parser.add_argument("-w", "--websocket", action="store_true", dest="useWebsocket", default=False,
                     help="Use MQTT over WebSocket")
-parser.add_argument("-id", "--clientId", action="store", dest="clientId", default="basicPubSub",
-                    help="Targeted client id")
+parser.add_argument("-id", "--clientId", action="store", dest="clientId", help="Targeted client id")
+parser.add_argument("-kId", "--keyId", action="store", dest="keyId", help="Targeted key id")
 parser.add_argument("-t", "--topic", action="store", dest="topic", default="sdk/test/Python", help="Targeted topic")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="both",
                     help="Operation modes: %s"%str(AllowedActions))
@@ -57,6 +57,7 @@ privateKeyPath = args.privateKeyPath
 port = args.port
 useWebsocket = args.useWebsocket
 clientId = args.clientId
+keyId = args.keyId
 topic = args.topic
 
 print("host = ", host)
@@ -66,6 +67,7 @@ print("privateKeyPath = ", privateKeyPath)
 print("port = ", port)
 print("useWebsocket = ", useWebsocket)
 print("clientId = ", clientId)
+print("keyId = ", keyId)
 print("topic = ", topic)
 
 if args.mode not in AllowedActions:
@@ -100,6 +102,7 @@ if useWebsocket:
     myAWSIoTMQTTClient = AWSIoTMQTTClient(clientId, useWebsocket=True)
     myAWSIoTMQTTClient.configureEndpoint(host, port)
     myAWSIoTMQTTClient.configureCredentials(rootCAPath)
+    myAWSIoTMQTTClient.configureIAMCredentials(clientId, keyId)
 else:
     myAWSIoTMQTTClient = AWSIoTMQTTClient(clientId)
     myAWSIoTMQTTClient.configureEndpoint(host, port)
