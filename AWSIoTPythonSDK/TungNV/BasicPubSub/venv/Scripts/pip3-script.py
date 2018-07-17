@@ -1,4 +1,4 @@
-#!D:\TUNG\MyPython\BasicExample\BasicPubSub\venv\Scripts\python.exe
+#!D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\BasicPubSub\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==10.0.1','console_scripts','pip3'
 __requires__ = 'pip==10.0.1'
 import re

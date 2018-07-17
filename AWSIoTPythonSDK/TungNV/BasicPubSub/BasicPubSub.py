@@ -14,7 +14,6 @@
  * permissions and limitations under the License.
  */
  '''
-from builtins import Exception
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import logging
@@ -40,11 +39,15 @@ parser.add_argument("-r", "--rootCA", action="store", required=True, dest="rootC
 parser.add_argument("-c", "--cert", action="store", dest="certificatePath", help="Certificate file path")
 parser.add_argument("-k", "--key", action="store", dest="privateKeyPath", help="Private key file path")
 parser.add_argument("-p", "--port", action="store", dest="port", type=int, help="Port number override")
-parser.add_argument("-w", "--websocket", action="store_true", dest="useWebsocket", default=False, help="Use MQTT over WebSocket")
-parser.add_argument("-id", "--clientId", action="store", dest="clientId", default="basicPubSub", help="Targeted client id")
+parser.add_argument("-w", "--websocket", action="store_true", dest="useWebsocket", default=False,
+                    help="Use MQTT over WebSocket")
+parser.add_argument("-id", "--clientId", action="store", dest="clientId", default="basicPubSub",
+                    help="Targeted client id")
 parser.add_argument("-t", "--topic", action="store", dest="topic", default="sdk/test/Python", help="Targeted topic")
-parser.add_argument("-m", "--mode", action="store", dest="mode", default="both", help="Operation modes: %s"%str(AllowedActions))
-parser.add_argument("-M", "--message", action="store", dest="message", default="Hello World!", help="Message to publish")
+parser.add_argument("-m", "--mode", action="store", dest="mode", default="both",
+                    help="Operation modes: %s"%str(AllowedActions))
+parser.add_argument("-M", "--message", action="store", dest="message", default="Hello World!",
+                    help="Message to publish")
 
 args = parser.parse_args()
 host = args.host
@@ -56,7 +59,7 @@ useWebsocket = args.useWebsocket
 clientId = args.clientId
 topic = args.topic
 
-print("\nhost = ", host)
+print("host = ", host)
 print("rootCAPath = ", rootCAPath)
 print("certificatePath = ", certificatePath)
 print("privateKeyPath = ", privateKeyPath)
@@ -64,8 +67,6 @@ print("port = ", port)
 print("useWebsocket = ", useWebsocket)
 print("clientId = ", clientId)
 print("topic = ", topic)
-print("mode = ", args.mode)
-print("message = ", args.message)
 
 if args.mode not in AllowedActions:
     parser.error("Unknown --mode option %s. Must be one of %s" % (args.mode, str(AllowedActions)))
@@ -112,24 +113,14 @@ myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 # Connect and subscribe to AWS IoT
-# try:
-#     myAWSIoTMQTTClient.connect()
-# except Exception as ex:
-#     print("\nError connect to AWS IoT: ", ex)
-# finally:
-#     if args.mode == 'both' or args.mode == 'subscribe':
-#         print("Subscribe!")
-#         myAWSIoTMQTTClient.subscribe(topic, 1, customCallback)\
-
 myAWSIoTMQTTClient.connect()
 if args.mode == 'both' or args.mode == 'subscribe':
-    print("Subscribe!")
     myAWSIoTMQTTClient.subscribe(topic, 1, customCallback)
 time.sleep(2)
 
 # Publish to the same topic in a loop forever
 loopCount = 0
-while loopCount < 100:
+while True:
     if args.mode == 'both' or args.mode == 'publish':
         message = {}
         message['message'] = args.message
@@ -139,4 +130,4 @@ while loopCount < 100:
         if args.mode == 'publish':
             print('Published topic %s: %s\n' % (topic, messageJson))
         loopCount += 1
-    time.sleep(2)
+    time.sleep(1)
