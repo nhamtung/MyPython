@@ -14,10 +14,14 @@ def customCallback(client, userdata, message):
     print(message.topic)
     print("--------------\n\n")
 
+# rootCAPath = "D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\rootCA.pem"
+# certificatePath = "D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\44432477c8-certificate.pem.crt"
+# privateKeyPath = "D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\44432477c8-private.pem.key"
+rootCAPath = "D:\MyFolder\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\rootCA.pem"
+certificatePath = "D:\MyFolder\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\44432477c8-certificate.pem.crt"
+privateKeyPath = "D:\MyFolder\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\44432477c8-private.pem.key"
+
 host = "avt6g3kvwjn2o.iot.ap-southeast-1.amazonaws.com"
-rootCAPath = "D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\rootCA.pem"
-certificatePath = "D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\44432477c8-certificate.pem.crt"
-privateKeyPath = "D:\TUNG\MyPython\AWSIoTPythonSDK\TungNV\Certificate\BasicPubSubPython\\44432477c8-private.pem.key"
 useWebsocket = False
 port = 443
 clientId = "AKIAIEV6W7J3Y5ESXFWA"
