@@ -27,10 +27,7 @@ AllowedActions = ['both', 'publish', 'subscribe']
 def customCallback(client, userdata, message):
     print("Received a new message: ")
     print(message.payload)
-    print("from topic: ")
-    print(message.topic)
-    print("--------------\n\n")
-
+    print("")
 
 # Read in command-line parameters
 parser = argparse.ArgumentParser()
@@ -122,15 +119,13 @@ if args.mode == 'both' or args.mode == 'subscribe':
 time.sleep(2)
 
 # Publish to the same topic in a loop forever
-loopCount = 0
+count = 0
 while True:
     if args.mode == 'both' or args.mode == 'publish':
-        message = {}
-        message['message'] = args.message
-        message['sequence'] = loopCount
-        messageJson = json.dumps(message)
+        strCount = str(count)
+        messageJson = "{\"state\":{\"reported\":{\"COUNT\": \"" + strCount + "\"}}}"
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':
             print('Published topic %s: %s\n' % (topic, messageJson))
-        loopCount += 1
-    time.sleep(1)
+        count += 1
+    time.sleep(3)
