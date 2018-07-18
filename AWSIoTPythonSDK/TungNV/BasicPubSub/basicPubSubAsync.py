@@ -27,7 +27,7 @@ def customOnMessage(message):
     print(message.payload)
     print("from topic: ")
     print(message.topic)
-    print("--------------\n\n")
+    print("-----------\n\n")
 
 
 # Suback callback
@@ -44,7 +44,6 @@ def customPubackCallback(mid):
     print("Received PUBACK packet id: ")
     print(mid)
     print("++++++++++++++\n\n")
-
 
 # Read in command-line parameters
 parser = argparse.ArgumentParser()
